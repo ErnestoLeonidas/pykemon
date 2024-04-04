@@ -1,34 +1,18 @@
 import pygame
 
-
-
 # Tamaño del sprite de Ash
 ASH_ANCHO = 16
 ASH_ALTO = 16
 
 # Velocidad de movimiento de Ash (número más bajo = más lento)
-VEL_MOVIMIENTO = 1.0  # Ajustado según preferencias
+VEL_MOVIMIENTO = 0.5  # Ajustado según preferencias
 
-# Índices de los sprites de Ash según su descripción
-SPRITES_ASH = {
-    "caminar_abajo_1": 0,
-    "pausado_abajo": 1,
-    "caminar_abajo_2": 2,
-    "caminar_arriba_1": 3,
-    "pausado_arriba": 4,
-    "caminar_arriba_2": 5,
-    "caminar_izquierda_1": 6,
-    "caminar_izquierda_2": 7,
-    "caminar_derecha_1": 8,
-    "caminar_derecha_2": 9
-}
+# Definir una nueva variable para controlar la velocidad de alternancia de los sprites
+FRAME_RATE = 10  # Ajusta este valor según sea necesario
 
-def cargar_ash_sprite(indice):
-    """Cargar el sprite de Ash en el índice dado"""
-    ash_sprite_sheet = pygame.image.load('./sprites/ash.png')
-    x = indice * (ASH_ANCHO + 1)  # Cada sprite está separado por 1 píxel
-    ash_sprite = ash_sprite_sheet.subsurface(pygame.Rect(x, 0, ASH_ANCHO, ASH_ALTO))
-    return ash_sprite
+# Agregar un contador de frames
+frame_contador = 0
+
 
 def mover_ash(teclas, ash_x, ash_y, ANCHO, ALTO):
     """Mover a Ash por el mapa"""
@@ -50,3 +34,25 @@ def mover_ash(teclas, ash_x, ash_y, ANCHO, ALTO):
 def actualizar_posicion_ash(teclas, ash_x, ash_y, ANCHO, ALTO):
     """Actualizar la posición de Ash según las teclas presionadas"""
     return mover_ash(teclas, ash_x, ash_y, ANCHO, ALTO)
+
+def actualizar_sprite_abajo(indice, teclas):
+    """Actualizar el sprite de Ash cuando se mueve hacia abajo"""
+    global frame_contador  # Para acceder a la variable frame_contador definida fuera de esta función
+    if teclas[pygame.K_DOWN]:
+        if indice % 2 == 0:
+            return pygame.image.load('./sprites/down_walk_1.png')
+        else:
+            return pygame.image.load('./sprites/down_walk_2.png')
+    else:
+        return pygame.image.load('./sprites/down_stop.png')
+
+def actualizar_sprite_arriba(indice, teclas):
+    """Actualizar el sprite de Ash cuando se mueve hacia arriba"""
+    global frame_contador  # Para acceder a la variable frame_contador definida fuera de esta función
+    if teclas[pygame.K_UP]:
+        if indice % 2 == 0:
+            return pygame.image.load('./sprites/top_walk_1.png')
+        else:
+            return pygame.image.load('./sprites/top_walk_2.png')
+    else:
+        return pygame.image.load('./sprites/top_stop.png')
