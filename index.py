@@ -31,6 +31,9 @@ ash_y = 100  # Ajustado según preferencias
 # Índice actual del sprite de Ash
 indice_ash = 0
 
+# Antes del bucle principal
+teclas_anterior = pygame.key.get_pressed()
+
 # Bucle principal
 ejecutando = True
 # Dentro del bucle principal
@@ -59,6 +62,10 @@ while ejecutando:
         ash_sprite = ash.actualizar_sprite_abajo(indice_ash, teclas)
     elif teclas[pygame.K_UP]:
         ash_sprite = ash.actualizar_sprite_arriba(indice_ash, teclas)
+    elif teclas[pygame.K_LEFT]:
+        ash_sprite = ash.actualizar_sprite_izquierda(indice_ash, teclas)
+    elif teclas[pygame.K_RIGHT]:
+        ash_sprite = ash.actualizar_sprite_derecha(indice_ash, teclas)
     else:
         ash_sprite = ash.actualizar_sprite_abajo(indice_ash, teclas)  # Utilizamos la función de abajo como valor por defecto
 

@@ -56,3 +56,23 @@ def actualizar_sprite_arriba(indice, teclas):
             return pygame.image.load('./sprites/top_walk_2.png')
     else:
         return pygame.image.load('./sprites/top_stop.png')
+
+def actualizar_sprite_izquierda(indice, teclas):
+    """Actualizar el sprite de Ash cuando se mueve hacia la izquierda"""
+    if teclas[pygame.K_LEFT]:
+        if indice % 2 == 0:
+            return pygame.image.load('./sprites/left_walk_1.png')
+        else:
+            return pygame.image.load('./sprites/left_walk_2.png')
+    else:
+        return None  # Devuelve None cuando la tecla de flecha izquierda no está presionada
+
+def actualizar_sprite_derecha(indice, teclas):
+    """Actualizar el sprite de Ash cuando se mueve hacia la derecha"""
+    if teclas[pygame.K_RIGHT]:
+        if indice % 2 == 0:
+            return pygame.image.load('./sprites/right_walk_1.png')
+        else:
+            return pygame.image.load('./sprites/right_walk_2.png')
+    else:
+        return None  # Devuelve None cuando la tecla de flecha derecha no está presionada
